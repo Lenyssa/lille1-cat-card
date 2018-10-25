@@ -1,0 +1,12 @@
+  <main>
+    <app-header></app-header>
+    <section class="container">
+      <h2>Cat card list</h2>
+      <hr />
+      <div class="card-group">
+          <app-card class="flipper mb-3"  *ngFor="let card of cards" [card]="card"></app-card>
+      </div>
+      <button class="btn btn-lg btn-danger circle add" (click)="gotoForm()"><i class="fas fa-plus"></i></button>
+    </section>
+    <app-footer class="bg-light"></app-footer>
+  </main>

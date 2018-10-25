@@ -1,0 +1,60 @@
+  <main>
+    <app-header></app-header>
+    <section class="container" *ngIf="notExistCard">
+      <h2>Not Exist this card in the App. Sorry!</h2>
+    </section>
+    <section class="container" *ngIf="!notExistCard">
+      <h2>Cat card form</h2>
+      <hr />
+      <form [formGroup]="form" novalidate [ngClass]="{'was-validated' : this.validated}">
+        <div class="form-group row">
+          <label for="cardTitle" class="col-sm-2 col-form-label">Card title</label>
+          <input type="text" required 
+          *ngIf="card !== undefined" 
+          formControlName= "title"
+          class="form-control col-sm-10" 
+          id="cardTitle" 
+          placeholder="Card title"
+          value= " {{card.title}}">
+          <input type="text" required
+          *ngIf="card === undefined" 
+          formControlName= "title"
+          class="form-control col-sm-10" 
+          id="cardTitle" 
+          placeholder="Card title">
+          <div *ngIf="form.invalid" class="invalid-feedback offset-md-2 col-sm-10">
+            That field is required. Please provide a value.
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cardImage" class="col-sm-2 col-form-label">Card image URL</label>
+          <input type="url" required 
+          *ngIf="card !== undefined" 
+          formControlName= "imageUrl"
+          class="form-control col-sm-10" 
+          id="cardImage" 
+          placeholder="Card image URL"
+          value="{{card.imageUrl}}">
+          <input type="url" required 
+          *ngIf="card === undefined"
+          formControlName= "imageUrl" 
+          class="form-control col-sm-10" 
+          id="cardImage" 
+          placeholder="Card image URL">
+          <div *ngIf="form.invalid" class="invalid-feedback offset-md-2 col-sm-10">
+            That field is required and attempt an URL as value. Please provide a value that respect URL format.
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cardDescription" class="col-sm-2 col-form-label">Card description</label>
+          <textarea class="form-control col-sm-10" id="cardDescription"
+          *ngIf="card === undefined" formControlName="description"></textarea>
+          <textarea class="form-control col-sm-10" id="cardDescription"
+          *ngIf="card !== undefined" value="{{card.description}}" formControlName="description"></textarea>
+        </div>
+        <button class="btn btn-danger" *ngIf="needDelete" (click)="onDelete()">Delete</button>
+        <button type="submit" class="btn btn-primary" (click)="onSave()">Save</button>
+      </form>
+    </section>
+    <app-footer class="bg-light"></app-footer>
+  </main>
